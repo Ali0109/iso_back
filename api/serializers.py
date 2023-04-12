@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from main import settings
-from . import models, helpers, exceptions
+from . import models, helpers
 
 
 class AdminSerializer(serializers.ModelSerializer):

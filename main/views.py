@@ -8,7 +8,7 @@ from django.core.files.base import File
 from django.db import connection
 from django.shortcuts import redirect
 
-from main.settings import base
+from . import settings
 from api.models import *
 
 
@@ -36,7 +36,7 @@ def truncate_token():
 
 def processAdminSeed():
     # truncate("process")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/process.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/process.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
         for line in csv_reader:
             Process.objects.create(
@@ -47,7 +47,7 @@ def processAdminSeed():
 
 def statusAdminSeed():
     # truncate("status")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/status.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/status.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
 
         for line in csv_reader:
@@ -59,7 +59,7 @@ def statusAdminSeed():
 
 def buttonSeed():
     # truncate("button")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/buttons.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/buttons.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
 
         for line in csv_reader:
@@ -72,7 +72,7 @@ def buttonSeed():
 
 def contentSeed():
     # truncate("content")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/contents.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/contents.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
 
         for line in csv_reader:
@@ -86,7 +86,7 @@ def contentSeed():
 def shopRegionSeed():
     truncate("region")
     truncate("shop")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/shops_with_regions.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/shops_with_regions.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
         for line in csv_reader:
             region, created = Region.objects.get_or_create(
@@ -103,7 +103,7 @@ def shopRegionSeed():
 
 def departmentSeed():
     # truncate("department")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/departments.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/departments.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
 
         for line in csv_reader:
@@ -115,7 +115,7 @@ def departmentSeed():
 
 def problemSeed():
     # truncate("problem")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/problems.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/problems.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
 
         for line in csv_reader:
@@ -127,7 +127,7 @@ def problemSeed():
 
 def disparitySeed():
     # truncate("disparity")
-    with open(os.path.join(base.BASE_DIR, 'media/csv/disparities.csv'), 'r', encoding="utf8") as csv_file:
+    with open(os.path.join(settings.BASE_DIR, 'media/csv/disparities.csv'), 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file)
 
         for line in csv_reader:
@@ -172,7 +172,7 @@ def clientSeed():
 
 
 def delete_upload_folder(path):
-    folder_path = base.MEDIA_ROOT + path
+    folder_path = settings.MEDIA_ROOT + path
     try:
         shutil.rmtree(folder_path)
     except Exception as e:

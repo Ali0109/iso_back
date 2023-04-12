@@ -1,12 +1,7 @@
-from rest_framework.routers import DefaultRouter
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 app_name = "api"
-
-# router = DefaultRouter()
-# Violation API
-# router.register("violations", views.ViolationView)
 
 
 urlpatterns = [

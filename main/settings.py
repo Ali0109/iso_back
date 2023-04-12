@@ -1,18 +1,18 @@
 import os
 import firebase_admin
-from dotenv import load_dotenv
 
 from pathlib import Path
 
-load_dotenv()
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG') == 'True'
 
+DOMAIN = os.environ.get('DOMAIN')
+
 CSRF_TRUSTED_ORIGINS = [
-    f"https://{os.environ.get('PRODUCTION_DOMAIN')}",
-    f"http://{os.environ.get('PRODUCTION_DOMAIN')}",
+    f"https://{DOMAIN}",
+    f"http://{DOMAIN}",
 ]
 
 INSTALLED_APPS = [
@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     # pip install djangorestframework
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
 
     # apps
     'api.apps.ApiConfig',
@@ -64,12 +63,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'ENGINE': os.environ.get('ENGINE'),
+        'NAME': os.environ.get('NAME'),
+        'USER': os.environ.get('USER'),
+        'PASSWORD': os.environ.get('PASSWORD'),
+        'HOST': os.environ.get('HOST'),
+        'PORT': os.environ.get('PORT'),
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
@@ -134,6 +133,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = f"{BASE_DIR}/{os.environ.get('GOO
 
 # BOT SETTINGS
 TELEGRAM_DOMAIN = os.environ.get('TELEGRAM_DOMAIN')
+BOT_KEY = os.environ.get('BOT_KEY')
 
 # AUTH TOKEN
 DEFAULT_AUTH_TOKEN = os.environ.get('DEFAULT_AUTH_TOKEN')

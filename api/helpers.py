@@ -5,7 +5,7 @@ from firebase_admin import messaging
 from datetime import datetime, timedelta, date
 
 from . import models
-from main.settings import base, local, production
+from main import settings
 
 
 class TimeHelpers:
@@ -157,8 +157,8 @@ class ViolationHelpers:
         # BOT SETTINGS
         command_violation = models.Content.objects.get(key="commands_violation")
         bot_message = f"Вам пришло новое сообщение о нарушении\nНажмите сюда {command_violation.title}{instance.pk} чтобы ответить на него"
-        bot_key = local.BOT_KEY if base.DEBUG else production.BOT_KEY
-        base_url = f'{base.TELEGRAM_DOMAIN}/bot{bot_key}/sendMessage?chat_id={instance.response_admin.tg_id}&text={bot_message}'
+        bot_key = settings.BOT_KEY
+        base_url = f'{settings.TELEGRAM_DOMAIN}/bot{bot_key}/sendMessage?chat_id={instance.response_admin.tg_id}&text={bot_message}'
         requests.get(url=base_url)
 
 

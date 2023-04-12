@@ -11,8 +11,6 @@ class ClientAPITest(APITestCase):
         main_views.buttonSeed()
         main_views.contentSeed()
         main_views.processAdminSeed()
-        main_views.regionSeed()
-        main_views.shopSeed()
         main_views.departmentSeed()
         main_views.problemSeed()
         main_views.disparitySeed()

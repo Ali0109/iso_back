@@ -4,7 +4,7 @@ from django_softdelete.models import SoftDeleteModel, SoftDeleteQuerySet
 from django.contrib.auth.models import PermissionsMixin
 from rest_framework.authtoken.models import Token
 
-from main.settings import base
+from main import settings
 
 
 class Status(SoftDeleteModel):
@@ -43,7 +43,7 @@ class CustomAdminManager(BaseUserManager):
         if user_id == 1:
             token, is_created = Token.objects.get_or_create(
                 user_id=user_id,
-                key=base.DEFAULT_AUTH_TOKEN,
+                key=settings.DEFAULT_AUTH_TOKEN,
             )
         else:
             token, is_created = Token.objects.get_or_create(user_id=user_id)

@@ -11,9 +11,10 @@ services:
     volumes:
       - .:/iso_back
     command: python manage.py runserver 0.0.0.0:8020
+    env_file:
+      - .env
     networks:
       - mysql-network
-
 
 networks:
   mysql-network:

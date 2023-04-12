@@ -6,7 +6,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from main.settings import base
+from main import settings
 from . import models, serializers, helpers, utils, exceptions
 
 
@@ -528,7 +528,7 @@ class ExcelAPIView(APIView):
         wb.save(excel_name)
 
         serializer_dict = {
-            "file": f"{base.CSRF_TRUSTED_ORIGINS[0]}/{excel_name}",
+            "file": f"{settings.CSRF_TRUSTED_ORIGINS[0]}/{excel_name}",
         }
         serializer = serializers.ExcelSerializer(serializer_dict, many=False)
 
