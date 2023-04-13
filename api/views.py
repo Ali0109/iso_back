@@ -34,10 +34,8 @@ class RegionByNameAPIView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         try:
-            test = "asdfasdfasdf"
-            return "asdfqwerqwe"
-            # queryset = models.Region.objects.get(name=self.kwargs['name'])
-            # return queryset
+            queryset = models.Region.objects.get(name=self.kwargs['name'])
+            return queryset
         except models.Region.DoesNotExist:
             raise exceptions.RegionDoesNotExist()
 
