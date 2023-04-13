@@ -1,4 +1,5 @@
 import os
+import logging
 import firebase_admin
 
 from pathlib import Path
@@ -7,6 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG') == 'True'
+
+ALLOWED_HOSTS = ["*"]
 
 DOMAIN = os.environ.get('DOMAIN')
 
@@ -114,12 +117,11 @@ USE_I18N = True
 
 USE_TZ = False
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -137,3 +139,41 @@ BOT_KEY = os.environ.get('BOT_KEY')
 
 # AUTH TOKEN
 DEFAULT_AUTH_TOKEN = os.environ.get('DEFAULT_AUTH_TOKEN')
+
+# LOGGING
+log_level = logging.DEBUG
+accesslog = os.environ.get('ACCESS_LOG', '-')
+errorlog = os.environ.get('ERROR_LOG', '-')
+workers = 2
+
+bind = '127.0.0.1:8020'
+worker_class = 'gunicorn.workers.sync.SyncWorker'
+
+logconfig_dict = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'generic',
+        },
+    },
+    'formatters': {
+        'generic': {
+            'format': '%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'loggers': {
+        'gunicorn.error': {
+            'level': log_level,
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'gunicorn.access': {
+            'level': log_level,
+            'handlers': ['console'],
+            'propagate': True,
+        },
+    }
+}

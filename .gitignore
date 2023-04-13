@@ -13,7 +13,10 @@ media
 *.pem
 *.p8
 firebase-admin-cred-iso.json
-
+logs/access/*
+logs/error/*
+static/admin/*
+static/rest_framework/*
 
 # If you are using PyCharm # 
 # User-specific stuff
